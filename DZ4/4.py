@@ -24,13 +24,13 @@ for i in range (0, k+1, 1):
         mnogochlen = mnogochlen + ' + ' + str(massiv[i]) 
     elif (i !=k and i != k-1 and i != 0) and massiv[i] != 0:
         if mnogochlen != '':
-            mnogochlen = mnogochlen + ' + ' + str(massiv[i]) + '*x**'+str(k-i)
+            mnogochlen = mnogochlen + ' + ' + str(massiv[i]) + '*x^'+str(k-i)
         else:
-            mnogochlen = str(massiv[i]) + '*x**'+str(k-i)
+            mnogochlen = str(massiv[i]) + '*x^'+str(k-i)
     elif massiv[i] != 0 and i == k-1:
         mnogochlen = mnogochlen + ' + ' + str(massiv[i]) + '*x'
     elif massiv[i] != 0 and i == 0:
-        mnogochlen = str(massiv[i]) + '*x**'+str(k)
+        mnogochlen = str(massiv[i]) + '*x^'+str(k)
 
 mnogochlen =  mnogochlen + ' = 0'        
 
