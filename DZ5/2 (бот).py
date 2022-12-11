@@ -7,3 +7,52 @@
 #За один ход можно забрать не более чем 28 конфет.
 #Все конфеты оппонента достаются сделавшему последний ход.
 #Сколько конфет нужно взять первому игроку, чтобы забрать все конфеты у своего конкурента?
+
+import random
+
+# начальныек значения
+konfet = 20
+max_xod = 5
+igrok = 1
+xod = 0
+
+# жеребьёвка
+igrok_1 = input('Введите имя первого игрока: ')
+igrok_2 = 'Супер БОТ'
+if random.randint(1,2) == 1:
+    print ('Первым будет ходить '+igrok_1)
+    xod_1 = igrok_1
+    xod_2 = igrok_2
+else:
+    print ('Первым будет ходить '+igrok_2)
+    xod_1 = igrok_2
+    xod_2 = igrok_1
+
+while konfet > max_xod:
+    print ('Сейчас на столе ' + str(konfet) + ' конфет')
+    if igrok == 1:
+        if xod_1 != 'Супер БОТ':
+            xod = int(input(xod_1 + ', Ваш ход!'))
+        else:
+            xod = konfet % (max_xod + 1)
+            print('Супер БОТ забрал ' + str(xod) + ' конфет')
+    else:
+        if xod_2 != 'Супер БОТ':
+            xod = int(input(xod_2 + ', Ваш ход!'))
+        else:
+            xod = konfet % (max_xod + 1)
+            print('Супер БОТ забрал ' + str(xod) + ' конфет')
+    if xod <= max_xod:
+        konfet -= xod
+        if igrok == 1:
+            igrok = 2
+        else:
+            igrok = 1
+    else:
+        print('Вы взяли слишком много конфет (больше '+ str(max_xod) + ' брать нельзя)')
+        print ('Попробуйте ещё раз!')
+
+if igrok == 1:
+    print ('Поздравляем - ' + xod_1 + ' выиграл!')
+else:
+    print ('Поздравляем - ' + xod_2 + ' выиграл!')
