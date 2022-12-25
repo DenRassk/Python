@@ -5,7 +5,7 @@ from model import find, add_row, del_row, read_spr_file, view_read_spr, stop
 
 
 def main():
-    TOKEN = '5439736558:AAH-lgsDXKfKm2fkFwu4zhyE4J40CiEQHU4'
+    TOKEN = input('Введите TOKEN: ')
     updater = Updater(token = TOKEN)
     dispatcher = updater.dispatcher
     
