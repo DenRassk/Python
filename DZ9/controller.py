@@ -1,7 +1,8 @@
 # описываем и запускаем бота
 from telegram.ext import Updater, CommandHandler, ConversationHandler, MessageHandler, Filters 
-from view import view, surname, add_user, del_user, edit_user1, edit_user2, start
-from model import find, add_row, del_row, edit_row, read_spr_file, view_read_spr, stop
+from view import view, surname, add_user, del_user, edit_user1, edit_user2, start, help, edit_row
+from model import find, add_row, del_row, read_spr_file, view_read_spr, stop
+
 
 def main():
     TOKEN = '5439736558:AAH-lgsDXKfKm2fkFwu4zhyE4J40CiEQHU4'
@@ -32,7 +33,7 @@ def main():
     dispatcher.add_handler(add_us)	# поиск по фамилии
     dispatcher.add_handler(edit_us)	# поиск по фамилии
     dispatcher.add_handler(del_us)	# поиск по фамилии    
-    dispatcher.add_handler(CommandHandler('help', help))	#
+    dispatcher.add_handler(CommandHandler('help', help))	# подсказка по командам
 
     updater.start_polling()
     print('bot start')

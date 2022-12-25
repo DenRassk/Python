@@ -1,7 +1,7 @@
 from telegram import ReplyKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, ConversationHandler, MessageHandler, Filters
 from model import read_spr_file, view_read_spr
-
+import csv
 
 # сообщение при команде /start
 def start(update, context):
@@ -14,6 +14,18 @@ def start(update, context):
  /del_user - для удаления абонента
  /edit_user - для редактирования записи''')
 
+
+# сообщение при команде /help
+def help(update, context):
+    context.bot.send_message(chat_id = update.effective_chat.id,
+                             text = '''Для работы со справочником наберите:
+ /view - для просмотра всего српавочника
+ /surname - для поиска по Фамилии
+ /add_user - для добавления абонента
+ /del_user - для удаления абонента
+ /edit_user - для редактирования записи
+ /help - список функций''')
+    
 
 # просмотр справочника
 def view(update, context):
@@ -55,7 +67,7 @@ def edit_user1(update, context):
         'Для изменения записи в справочнике введите\n'
         'номер записи: \n'
         '(для отказа от добавления записи наберите /stop)')    
-    
+  
     return 1
 
 # редактирование записи в справочнике - запрос данных
@@ -66,5 +78,23 @@ def edit_user2(update, context):
         'Напишите, через запятую\n'
         'Фамилия,имя,номер телефона,должность: \n'
         '(для отказа от добавления записи наберите /stop)')    
-    
+
     return 2
+
+
+# редактирование записи в справочнике - собственно добавляем данные
+def edit_row(update, context):
+    global number
+    with open('spr.csv', 'r', encoding='utf-8',newline = '') as file:
+        reader = list(csv.reader(file))
+    if len(reader) >= number+1 :
+        reader[number] = update.message.text.split(sep=',')
+        with open('spr.csv',mode = 'w', encoding='utf-8', newline = '') as file:
+            writer = csv.writer(file)
+            for i in reader:
+                writer.writerow(i)
+        update.message.reply_text('Данные о абоненте изменены!')
+    else:
+        update.message.reply_text(f'Абонента с номером {str(number)} нет в справочнике!')    
+    
+    return ConversationHandler.END

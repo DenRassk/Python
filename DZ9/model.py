@@ -42,21 +42,21 @@ def del_row(update, context):
 
 
 # редактирование записи в справочнике - собственно добавляем данные
-def edit_row(update, context):
-    global number
-    with open('spr.csv', 'r', encoding='utf-8',newline = '') as file:
-        reader = list(csv.reader(file))
-    if len(reader) >= number+1 :
-        reader[number] = update.message.text.split(sep=',')
-        with open('spr.csv',mode = 'w', encoding='utf-8', newline = '') as file:
-            writer = csv.writer(file)
-            for i in reader:
-                writer.writerow(i)
-        update.message.reply_text('Данные о абоненте изменены!')
-    else:
-        update.message.reply_text(f'Абонента с номером {str(number)} нет в справочнике!')    
-    
-    return ConversationHandler.END
+#def edit_row(update, context):
+#    global number
+#    with open('spr.csv', 'r', encoding='utf-8',newline = '') as file:
+#        reader = list(csv.reader(file))
+#    if len(reader) >= number+1 :
+#        reader[number] = update.message.text.split(sep=',')
+#        with open('spr.csv',mode = 'w', encoding='utf-8', newline = '') as file:
+#            writer = csv.writer(file)
+#            for i in reader:
+#                writer.writerow(i)
+#        update.message.reply_text('Данные о абоненте изменены!')
+#    else:
+#        update.message.reply_text(f'Абонента с номером {str(number)} нет в справочнике!')    
+#    
+#    return ConversationHandler.END
 
 
 # загружаем справочник из файла
